@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from __future__ import unicode_literals
-import youtube_dl, sys
+import youtube_dl, sys, os
 
 o = False
 
@@ -14,8 +14,12 @@ except:
     print("NOTE: Only Youtube links are supported!")
 
 if(o):
+    if os.name == 'nt':
+        outtmpl = 'C:\\Users\\' + os.getlogin() + '\\Music\\%(title)s.%(ext)s'
+    else:
+        outtmpl = '~/Music/%(title)s.%(ext)s'
     ydl_opts = {
-        'outtmpl': '~/Music/%(title)s.%(ext)s',
+        'outtmpl': outtmpl,
         'quiet': True,
         'format': 'bestaudio/best',
         'postprocessors': [{
